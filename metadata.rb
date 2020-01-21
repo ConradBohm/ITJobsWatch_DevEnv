@@ -18,3 +18,6 @@ chef_version '>= 14.0'
 # a Supermarket.
 #
 # source_url 'https://github.com/<insert_org_here>/dev_env'
+
+depends 'snu_python', '~> 1.2.4'
+depends 'apt' 
