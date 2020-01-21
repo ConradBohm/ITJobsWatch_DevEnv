@@ -2,6 +2,7 @@
 
 `kitchen setup`
 `kitchen login` - password: "vagrant" if prompted
+
 ----------------------------------------
 `cd /home/ubuntu/app`
 
@@ -9,5 +10,6 @@
 `sudo python3 -m pytest tests`
 
 `exit`
+
 ----------------------------------------
 `kitchen destroy`
