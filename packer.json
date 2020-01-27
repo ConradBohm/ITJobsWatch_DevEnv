@@ -1,0 +1,42 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY_ID`}}"
+  },
+  "builders": [{
+    "ami_name": "conrad-bohm-proj1-ITJobsWatch-{{timestamp}}",
+    "type": "amazon-ebs",
+
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+
+    "subnet_id": "subnet-05f17c9de25b45b3a",
+    "associate_public_ip_address": "true",
+
+    "ssh_keypair_name": "conrad-bohm-eng48-first-key",
+    "ssh_private_key_file": "~/.ssh/conrad-bohm-eng48-first-key.pem",
+
+    "region": "eu-west-1",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+      },
+      "owners": ["099720109477"],
+      "most_recent": true
+    },
+    "instance_type": "t2.micro",
+    "ssh_username": "ubuntu",
+    "ami_name": "packer-example {{timestamp}}"
+  }],
+
+  "provisioners":[{
+    "type": "chef-solo",
+    "cookbook_paths": ["./berks-cookbooks"],
+    "run_list": ["dev_env::default"]
+  }
+
+
+]
+}
